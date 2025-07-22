@@ -23,3 +23,13 @@ Booking_agent = Agent(name = "booking_agent" , instruction = """you are a bookin
 Explore_Agent = Agent(name = "explore_agent" , instruction = """your are a Exploring Agent an your work is to provide or suggest Arraction or foods or
                                                                 culture of place based on its destination and its hotel or place or famous things about that places """)
 
+main_agent = Agent(
+    name = "main-agent",
+    instructions = "you are a main agent that analyze user input and give handoff to its expert agent not give answere bs your own",
+    handoffs = [Destination_agent, Booking_agent, Explore_Agent]
+)
+
+response = input("how can i help you in planning your trip?")
+result = Runner.run_sync(main_agent , response , run_config = config)
+print(result.final_output)
+
